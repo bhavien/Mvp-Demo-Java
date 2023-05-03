@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.dashboard.DashboardActivity">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLogOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="5dp"
+        android:background="@drawable/bg_edit_text"
+        android:backgroundTint="@color/black"
+        android:text="@string/logout"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAddProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_edit_text"
+        android:backgroundTint="@color/black"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp"
+        android:text="@string/add_product"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="#d3d3d3"
+        app:layout_constraintTop_toBottomOf="@id/btnLogOut"
+        app:layout_constraintStart_toStartOf="@id/btnLogOut"
+        app:layout_constraintEnd_toEndOf="@id/btnAddProduct"
+        android:visibility="gone"
+        android:layout_marginVertical="5dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvProductList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/your_product_list"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_marginVertical="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/view1"
+        app:layout_constraintBottom_toBottomOf="@id/view2" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="#d3d3d3"
+        app:layout_constraintTop_toBottomOf="@id/tvProductList"
+        app:layout_constraintStart_toStartOf="@id/btnLogOut"
+        app:layout_constraintEnd_toEndOf="@id/btnAddProduct"
+        android:layout_marginVertical="5dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvProduct"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="10dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/btnAddProduct"
+        app:layout_constraintStart_toStartOf="@id/btnLogOut"
+        tools:listitem="@layout/item_product"
+        tools:itemCount="5"
+        app:layout_constraintTop_toBottomOf="@id/tvProductList" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvNoProduct"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/product_list_is_empty"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/btnAddProduct"
+        app:layout_constraintStart_toStartOf="@id/btnLogOut"
+        app:layout_constraintTop_toBottomOf="@id/tvProductList" />
+</androidx.constraintlayout.widget.ConstraintLayout>

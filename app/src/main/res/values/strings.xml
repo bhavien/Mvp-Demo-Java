@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">MvpSimpleDemo</string>
+
+    <!-- Log In -->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="please_enter_valid_email">Please Enter Valid Email</string>
+    <string name="password_error_message">password must greater then 6 character.</string>
+    <string name="please_enter_email">Please Enter email</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard">Dashboard</string>
+    <string name="product_name">Product Name</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
+    <string name="logout">Logout</string>
+    <string name="add_product">Add Product</string>
+    <string name="product_list_is_empty">Product list is empty</string>
+    <string name="delete_message">Are you sure want to remove this product?</string>
+    <string name="remove_product">Remove Product</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="your_product_list">Your Product list</string>
+
+
+</resources>
