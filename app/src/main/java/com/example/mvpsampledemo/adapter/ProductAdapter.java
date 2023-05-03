@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.mvpsampledemo.R;
 import com.example.mvpsampledemo.roomdatabase.entity.Product;
 
@@ -39,8 +38,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ProductAdapter.ViewHolder holder, int position) {
         holder.tvName.setText(productList.get(position).name);
+        if (productList.size() < 2){ holder.view.setVisibility(View.GONE); }
+        holder.tvName.setText(productList.get(position).name);
     }
-
     @Override
     public int getItemCount() {
         return productList.size();
@@ -48,12 +48,18 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         AppCompatTextView tvName;
+        View view;
         AppCompatImageView ivDelete;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tvName);
             ivDelete = itemView.findViewById(R.id.ivDelete);
+            view = itemView.findViewById(R.id.view);
             ivDelete.setOnClickListener(this);
+            itemView.setOnLongClickListener(v->{
+                mListener.onDeleteButton(getAdapterPosition());
+                return true;
+            });
         }
         @Override
         public void onClick(View v) {

@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,6 +27,7 @@ import com.example.mvpsampledemo.data.DataManager;
 import com.example.mvpsampledemo.roomdatabase.database.AppDataBase;
 import com.example.mvpsampledemo.roomdatabase.entity.Product;
 import com.example.mvpsampledemo.ui.login.LoginActivity;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,7 +42,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardMvp
     DashboardPresenter dashboardPresenter;
     AppCompatTextView tvNoProduct;
     ArrayList<Product> productList = new ArrayList<>();
-    AppCompatEditText etProduct;
+    TextInputEditText etProduct;
     String productName;
     AlertDialog.Builder productRemoveAlert;
     Dialog addProductDialog;
@@ -96,6 +99,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardMvp
     public void openAddProductDialog() {
         addProductDialog = new Dialog(this);
         addProductDialog.setContentView(R.layout.add_product_dialog);
+        addProductDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         addProductDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         addProductDialog.setCancelable(false);
         dialogAddButton = addProductDialog.findViewById(R.id.btnAdd);
