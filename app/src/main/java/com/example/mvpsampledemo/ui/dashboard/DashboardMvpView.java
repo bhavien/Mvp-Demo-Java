@@ -8,7 +8,5 @@ public interface DashboardMvpView extends MvpView {
     void addButtonClick();
     void cancelButtonClick();
     void setProductAdapter();
-
-
-
+    void deleteProductFromDB(int position);
 }

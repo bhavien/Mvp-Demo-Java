@@ -1,6 +1,5 @@
 package com.example.mvpsampledemo.ui.dashboard;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -11,13 +10,14 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.mvpsampledemo.MyApp;
 import com.example.mvpsampledemo.R;
 import com.example.mvpsampledemo.adapter.ProductAdapter;
@@ -25,13 +25,13 @@ import com.example.mvpsampledemo.data.DataManager;
 import com.example.mvpsampledemo.roomdatabase.database.AppDataBase;
 import com.example.mvpsampledemo.roomdatabase.entity.Product;
 import com.example.mvpsampledemo.ui.login.LoginActivity;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 
 
 public class DashboardActivity extends AppCompatActivity implements DashboardMvpView, ProductAdapter.DeleteClickListener {
-
 
     AppCompatButton btnAddProduct, btnLogOut, dialogAddButton, dialogCancelButton;
     RecyclerView rvProduct;
@@ -44,8 +44,6 @@ public class DashboardActivity extends AppCompatActivity implements DashboardMvp
     AlertDialog.Builder productRemoveAlert;
     Dialog addProductDialog;
     DataManager dataManager;
-    AppCompatTextView tvProductList;
-
 
     public static Intent getStartIntent(Context context) {
         return new Intent(context, DashboardActivity.class);
@@ -61,7 +59,6 @@ public class DashboardActivity extends AppCompatActivity implements DashboardMvp
         btnLogOut = findViewById(R.id.btnLogOut);
         rvProduct = findViewById(R.id.rvProduct);
         tvNoProduct = findViewById(R.id.tvNoProduct);
-        tvProductList = findViewById(R.id.tvProductList);
 
         manageProductList();
 
@@ -73,6 +70,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardMvp
         btnLogOut.setOnClickListener(view -> dashboardPresenter.setUserLogout());
 
     }
+
     private void manageProductList() {
         AppDataBase dataBase = AppDataBase.getAppDatabase(this);
         productList = new ArrayList(dataBase.productDao().loadAllProductList());
@@ -105,9 +103,13 @@ public class DashboardActivity extends AppCompatActivity implements DashboardMvp
         etProduct = addProductDialog.findViewById(R.id.etProduct);
         etProduct.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
             @Override
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals(""))
@@ -145,25 +147,9 @@ public class DashboardActivity extends AppCompatActivity implements DashboardMvp
         rvProduct.setAdapter(productAdapter);
     }
 
-
     @Override
-    public void onDeleteButton(int position) {
-        productRemoveAlert = new AlertDialog.Builder(this);
-        productRemoveAlert.setMessage(R.string.delete_message)
-                .setTitle(R.string.remove_product)
-                .setCancelable(false)
-                .setPositiveButton(R.string.yes, (dialog, id) -> {
-
-                })
-                .setNegativeButton(R.string.no, (dialog, id) -> dialog.cancel());
-        AlertDialog alert = productRemoveAlert.create();
-        alert.show();
-    }
-
-
-
-    @SuppressLint("NotifyDataSetChanged")
-    private void deleteItemFromDao(int position) {
+    public void deleteProductFromDB(int position) {
+        Log.e("TAG", "deleteProductFromDB: " + position);
         AppDataBase dataBase = AppDataBase.getAppDatabase(this);
         dataBase.productDao().deleteById(productList.get(position).id);
         productList.remove(position);
@@ -172,6 +158,21 @@ public class DashboardActivity extends AppCompatActivity implements DashboardMvp
             tvNoProduct.setVisibility(View.VISIBLE);
             rvProduct.setVisibility(View.GONE);
         }
+    }
+
+
+    @Override
+    public void onDeleteButton(int position) {
+        productRemoveAlert = new AlertDialog.Builder(this);
+        productRemoveAlert.setMessage(R.string.delete_message)
+                .setTitle(R.string.remove_product)
+                .setCancelable(false)
+                .setPositiveButton(R.string.yes, (dialog, id) -> {
+                    dashboardPresenter.deleteProductFromDB(position);
+                })
+                .setNegativeButton(R.string.no, (dialog, id) -> dialog.cancel());
+        AlertDialog alert = productRemoveAlert.create();
+        alert.show();
     }
 
 

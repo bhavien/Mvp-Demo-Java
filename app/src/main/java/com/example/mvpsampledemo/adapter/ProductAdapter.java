@@ -15,16 +15,15 @@ import com.example.mvpsampledemo.roomdatabase.entity.Product;
 import java.util.ArrayList;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
-    private ArrayList<Product> productList;
+    private final ArrayList<Product> productList;
     Context context;
-
     public ProductAdapter(ArrayList<Product> productList, Context context, DeleteClickListener mListener) {
         this.productList = productList;
         this.context = context;
         this.mListener = mListener;
     }
 
-    private DeleteClickListener mListener;
+    private final DeleteClickListener mListener;
 
     public interface DeleteClickListener {
         void onDeleteButton(int position);

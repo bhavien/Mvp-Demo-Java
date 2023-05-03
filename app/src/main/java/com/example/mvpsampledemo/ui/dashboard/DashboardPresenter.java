@@ -5,6 +5,8 @@ import com.example.mvpsampledemo.ui.base.BasePresenter;
 
 public class DashboardPresenter<V extends DashboardMvpView> extends BasePresenter<V>  {
 
+    Integer position;
+
     public DashboardPresenter(DataManager dataManager) {
         super(dataManager);
     }
@@ -24,6 +26,10 @@ public class DashboardPresenter<V extends DashboardMvpView> extends BasePresente
     public void setUserLogout() {
         getDataManager().clear();
         getMvpView().openSplashActivity();
+    }
+
+    public void deleteProductFromDB(int position) {
+        getMvpView().deleteProductFromDB(position);
     }
 
 }
