@@ -27,7 +27,6 @@ public class DashboardPresenter<V extends DashboardMvpView> extends BasePresente
         getDataManager().clear();
         getMvpView().openSplashActivity();
     }
-
     public void deleteProductFromDB(int position) {
         getMvpView().deleteProductFromDB(position);
     }

@@ -5,6 +5,9 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import com.example.mvpsampledemo.roomdatabase.entity.Product;
+import com.google.android.gms.tasks.OnSuccessListener;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -18,5 +21,6 @@ public interface ProductDao {
 
     @Query("DELETE FROM tbl_product WHERE id = :id")
     void deleteById(int id);
+
 
 }
